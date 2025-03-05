@@ -11,6 +11,8 @@ abstract class AppPadding {
 
   static const sideBasePadding = EdgeInsets.symmetric(horizontal: sidePaddingValue);
   static const tinySizedBoxHeigth = SizedBox(height: tinyPaddingValue,);
+
+  static final smallBorderRaduis = BorderRadius.circular(3);
 }
 
 abstract class AppBorder {
@@ -45,7 +47,8 @@ class AppTheme implements AppThemeData {
     secondary: ColorsConsts.purple,
     secondaryContainer: ColorsConsts.purpleLight,
     surface: ColorsConsts.blueDark,
-    tertiary: ColorsConsts.yellow
+    tertiary: ColorsConsts.yellow,
+    onErrorContainer: ColorsConsts.red
   );
 
   FilledButtonThemeData get _darkFilledButtonTheme => FilledButtonThemeData(
@@ -58,7 +61,7 @@ class AppTheme implements AppThemeData {
       textStyle: _textTheme.titleMedium,
       foregroundColor: ColorsConsts.mistyRose,
       alignment: Alignment.center,
-      minimumSize: Size(100, 50),
+      minimumSize: Size(80, 40),
     )
   );
 
@@ -68,7 +71,13 @@ class AppTheme implements AppThemeData {
       fontSize: 24,
       fontWeight: FontWeight.w700,
       fontFamily: FontFamily.rajdhani
-    )
+    ),
+    headlineMedium: TextStyle(
+      color: ColorsConsts.blackBlue,
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+      fontFamily: FontFamily.rajdhani
+    ),
   );
 }
 
@@ -89,4 +98,6 @@ abstract class ColorsConsts {
   static const green = Color(0xFFB4D274);
   static const blueDark = Color(0xFF204A70);
   static const skyBlue = Color(0xFFDAE7F2);
+  static const greyBlue = Color(0xFF4F7392);
+  static const blackBlue = Color(0xFF293241);
 }

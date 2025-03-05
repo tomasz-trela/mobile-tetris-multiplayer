@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:mobile_tetris_multiplayer/features/tetris/models/coordinates.dart';
-import 'package:mobile_tetris_multiplayer/features/tetris/models/shape.dart';
+import 'package:mobile_tetris_multiplayer/features/game/models/coordinates.dart';
+import 'package:mobile_tetris_multiplayer/features/game/models/shape.dart';
 
 
 class BoardModel extends ChangeNotifier {

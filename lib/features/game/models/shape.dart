@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_tetris_multiplayer/features/tetris/models/coordinates.dart';
+import 'package:mobile_tetris_multiplayer/features/game/models/coordinates.dart';
 
 class Shape {
   List<Coordinates> coordinates;

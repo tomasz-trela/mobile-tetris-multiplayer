@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mobile_tetris_multiplayer/app/theme/theming.dart';
-import 'package:mobile_tetris_multiplayer/common/widgets/profile_app_bar.dart';
+import 'package:mobile_tetris_multiplayer/common/widgets/app_bar/base_app_bar.dart';
 import 'package:mobile_tetris_multiplayer/features/home/widgets/menu_selection_buttons.dart';
 import 'package:mobile_tetris_multiplayer/gen/assets.gen.dart';
 
@@ -11,7 +11,14 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ProfileAppBar(onIconPressed: () {}),
+      appBar: BaseAppBar(
+        actions: [
+          IconButton(
+            icon: SvgPicture.asset(Assets.icons.avatar), 
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: Center(
         child: ListView(
           padding: AppPadding.sideBasePadding,

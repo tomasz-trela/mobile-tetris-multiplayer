@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mobile_tetris_multiplayer/app/router.dart';
 import 'package:mobile_tetris_multiplayer/app/theme/theming.dart';
 import 'package:mobile_tetris_multiplayer/gen/assets.gen.dart';
 
@@ -24,7 +25,7 @@ class MenuSelectionButtons extends StatelessWidget {
                     _MenuButtonSmall(
                       text: "Singleplayer", 
                       iconCount: 1, 
-                      onPressed: (){},
+                      onPressed: router.goSingleplayerPage,
                       backgroundColor: colorScheme.secondary,
                     ),
                     SizedBox(height: AppPadding.mediumPaddingValue,),
