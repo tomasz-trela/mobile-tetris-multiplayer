@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_tetris_multiplayer/app/theme/theming.dart';
 
 class GameResultWidget extends StatelessWidget {
   const GameResultWidget({
@@ -19,7 +20,7 @@ class GameResultWidget extends StatelessWidget {
       padding: EdgeInsets.all(4),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(10)
+        borderRadius: AppPadding.mediumBorderRadius
       ),
       child: Column(
         children: [

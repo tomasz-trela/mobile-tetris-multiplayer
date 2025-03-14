@@ -1,157 +1,113 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
-import 'package:mobile_tetris_multiplayer/features/game/models/coordinates.dart';
+import 'package:mobile_tetris_multiplayer/features/game/models/block.dart';
+import 'package:mobile_tetris_multiplayer/features/game/models/color_type.dart';
+import 'package:mobile_tetris_multiplayer/features/game/models/direction.dart';
+import 'package:mobile_tetris_multiplayer/features/game/models/game.dart';
+import 'package:mobile_tetris_multiplayer/features/game/widgets/game_shapes.dart';
 
-class Shape {
-  List<Coordinates> coordinates;
-  final Color color;
-  final Coordinates center;
+abstract class Shape {
+  Shape(this.blocks, this.center) : colorType = ColorType.random();
 
-  Shape(this.coordinates, this.color, this.center);
+  List<Block> blocks;
+  Block center;
+  ColorType colorType;
 
-  void moveDown(){
-    for (var element in coordinates) {
-      element.moveDown();
+  void move(Direction direction){
+    center.move(direction);
+    for (var block in blocks) {
+      block.move(direction);
     }
-    center.moveDown();
-
   }
 
-  void moveLeft(){
-    for (var element in coordinates) {
-      element.moveLeft();
-    }
-    center.moveLeft();
+  bool canMove(Direction direction, Board board) => 
+      blocks.every((block)=> block.canMove(direction, board));
+  
+  factory Shape.random() => switch (Random().nextInt(7)) {
+    0 => LeftL(),
+    1 => RightL(),
+    2 => TShape(),
+    3 => IShape(),
+    4 => OShape(),
+    5 => ZShape(),
+    6 => SShape(),
+    _ => OShape(),
+  };
+
+  Widget getShapeWidget() {
+    return switch (this) {
+      LeftL _ => LeftLShape(color: colorType),
+      RightL _=> RightLShape(color: colorType),
+      TShape _ => TShapeWidget(color: colorType),
+      IShape _ => IShapeWidget(color: colorType),
+      OShape _ => OShapeWidget(color: colorType),
+      ZShape _ => ZShapeWidget(color: colorType),
+      SShape _ => SShapeWidget(color: colorType),
+      _ => OShapeWidget(color: colorType),
+    };
   }
+}
 
-  void moveRight(){
-    for (var element in coordinates) {
-      element.moveRight();
-    }
-    center.moveRight();
-  }
+class LeftL extends Shape {
+  LeftL() : super([
+    Block(0, 0),
+    Block(1, 0),
+    Block(2, 0),
+    Block(2, 1),
+  ], Block(1, 0));
+}
 
-  void rotate(){
-    List<Coordinates> newCoordinates = [];
-    bool canRotate = true;
-    for (var element in coordinates) {
-      if(element == center){
-        newCoordinates.add(element);
-      }else{
-        int newX = center.x +(element.y-center.y);
-        int newY = center.y -(element.x-center.x);
-        if(newX < 0 || newX > 9 || newY < 0 || newY > 19){
-          canRotate = false;
-          break;
-        }
-        newCoordinates.add(Coordinates(newX, newY));
-      }
-    }
+class RightL extends Shape {
+  RightL() : super([
+    Block(0, 1),
+    Block(1, 1),
+    Block(2, 1),
+    Block(2, 0),
+  ], Block(1, 1));
+}
 
-    if(canRotate) coordinates = newCoordinates;
-  }
+class TShape extends Shape {
+  TShape() : super([
+    Block(0, 0),
+    Block(1, 0),
+    Block(2, 0),
+    Block(1, 1),
+  ], Block(1, 0));
+}
 
-  bool canMoveDown(List<List<Color>> board){
-    return getBottomCoordinates().every((element) => element.canMoveDown(board));
-  }
+class IShape extends Shape {
+  IShape() : super([
+    Block(0, 0),
+    Block(1, 0),
+    Block(2, 0),
+    Block(3, 0),
+  ], Block(1, 0));
+}
 
-  bool canMoveLeft(List<List<Color>> board){
-    return getLeftCoordinates().every((element) => element.canMoveLeft(board));
-  }
+class OShape extends Shape {
+  OShape() : super([
+    Block(0, 0),
+    Block(0, 1),
+    Block(1, 0),
+    Block(1, 1),
+  ], Block(0, 0));
+}
 
-  bool canMoveRight(List<List<Color>> board){
-    return getRightCoordinates().every((element) => element.canMoveRight(board));
-  }
+class ZShape extends Shape {
+  ZShape() : super([
+    Block(0, 0),
+    Block(1, 0),
+    Block(1, 1),
+    Block(2, 1),
+  ], Block(1, 0));
+}
 
-  List<Coordinates> getNextDownCoordinates(){
-    List<Coordinates> result = [];
-    for (var element in coordinates) {
-      result.add(element.getNextDown());
-    }
-    return result;
-  }
-
-  Shape copyWith({List<Coordinates>? coordinates, Color? color, Coordinates? center}) {
-    List<Coordinates> newCoordinates = [];
-    for (var element in coordinates ?? this.coordinates) {
-      newCoordinates.add(element.copyWith());
-    }
-    return Shape(coordinates ?? newCoordinates, color ?? this.color, center ?? this.center.copyWith());
-  }
-
-  List<Coordinates> getBottomCoordinates(){
-    List<Coordinates> result = [];
-
-    for(var coordinate in coordinates){
-      if(result.isEmpty) {
-        result.add(coordinate);
-      } else{
-        bool found = false;
-        for(int i=0; i<result.length; i++ ){
-          if(coordinate.x == result[i].x){
-            if(coordinate.y > result[i].y) {
-              result[i] = coordinate;
-            }
-            found = true;
-          }
-        }
-        if(!found){
-          result.add(coordinate);
-        }
-      }
-    }
-    return result;
-  }
-
-  List<Coordinates> getLeftCoordinates(){
-    List<Coordinates> result = [];
-
-    for(var coordinate in coordinates){
-      if(result.isEmpty) {
-        result.add(coordinate);
-      }else{
-        bool found = false;
-        for(int i=0; i<result.length; i++ ){
-          if(coordinate.y == result[i].y ){
-            if(coordinate.x < result[i].x) {
-              result[i] = coordinate;
-            }
-            found = true;
-          }
-        }
-        if(!found){
-          result.add(coordinate);
-        }
-      }
-    }
-    return result;
-  }
-
-  List<Coordinates> getRightCoordinates(){
-    List<Coordinates> result = [];
-
-    for(var coordinate in coordinates){
-      if(result.isEmpty) {
-        result.add(coordinate);
-      } else{
-        bool found = false;
-        for(int i=0; i<result.length; i++ ){
-          if(coordinate.y == result[i].y ){
-            if(coordinate.x > result[i].x) {
-              result[i] = coordinate;
-            }
-            found = true;
-          }
-        }
-        if(!found){
-          result.add(coordinate);
-        }
-      }
-    }
-    return result;
-  }
-
-  @override
-  String toString() {
-    return "coordinates: $coordinates, color: $color, center: $center";
-  }
+class SShape extends Shape {
+  SShape() : super([
+    Block(0, 1),
+    Block(1, 1),
+    Block(1, 0),
+    Block(2, 0),
+  ], Block(1, 1));
 }

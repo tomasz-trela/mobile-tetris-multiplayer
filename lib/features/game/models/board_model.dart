@@ -2,24 +2,24 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mobile_tetris_multiplayer/features/game/models/coordinates.dart';
-import 'package:mobile_tetris_multiplayer/features/game/models/shape.dart';
+import 'package:mobile_tetris_multiplayer/features/game/models/shape2.dart';
 
 
 class BoardModel extends ChangeNotifier {
   final List<List<Color>> board = List.generate(20, (index) => List.filled(10, Colors.grey.shade800));
 
-  final List<Shape> nextShapes = [
-      Shape([Coordinates(0, 0), Coordinates(1, 0), Coordinates(2, 0), Coordinates(3, 0)], Colors.red, Coordinates(1, 0)),
-      Shape([Coordinates(0, 0), Coordinates(1, 0), Coordinates(2, 0), Coordinates(2, 1)], Colors.blue, Coordinates(1, 0)),
-      Shape([Coordinates(0, 0), Coordinates(1, 0), Coordinates(2, 0), Coordinates(1, 1)], Colors.green, Coordinates(1, 0)),
-      Shape([Coordinates(0, 0), Coordinates(1, 0), Coordinates(1, 1), Coordinates(2, 1)], Colors.yellow, Coordinates(1, 1)),
-      Shape([Coordinates(0, 0), Coordinates(1, 0), Coordinates(1, 1), Coordinates(2, 0)], Colors.purple, Coordinates(1, 0)),
-      Shape([Coordinates(0, 0), Coordinates(1, 0), Coordinates(1, 1), Coordinates(2, 1)], Colors.orange, Coordinates(1, 1)),
-      Shape([Coordinates(0, 0), Coordinates(1, 0), Coordinates(2, 0), Coordinates(1, 1)], Colors.pink, Coordinates(1, 0)),
+  final List<Shape1> nextShapes = [
+      Shape1([Coordinates(0, 0), Coordinates(1, 0), Coordinates(2, 0), Coordinates(3, 0)], Colors.red, Coordinates(1, 0)),
+      Shape1([Coordinates(0, 0), Coordinates(1, 0), Coordinates(2, 0), Coordinates(2, 1)], Colors.blue, Coordinates(1, 0)),
+      Shape1([Coordinates(0, 0), Coordinates(1, 0), Coordinates(2, 0), Coordinates(1, 1)], Colors.green, Coordinates(1, 0)),
+      Shape1([Coordinates(0, 0), Coordinates(1, 0), Coordinates(1, 1), Coordinates(2, 1)], Colors.yellow, Coordinates(1, 1)),
+      Shape1([Coordinates(0, 0), Coordinates(1, 0), Coordinates(1, 1), Coordinates(2, 0)], Colors.purple, Coordinates(1, 0)),
+      Shape1([Coordinates(0, 0), Coordinates(1, 0), Coordinates(1, 1), Coordinates(2, 1)], Colors.orange, Coordinates(1, 1)),
+      Shape1([Coordinates(0, 0), Coordinates(1, 0), Coordinates(2, 0), Coordinates(1, 1)], Colors.pink, Coordinates(1, 0)),
     ];
 
   int actualShapeIndex = 0;
-  late Shape shape = nextShapes[actualShapeIndex].copyWith();
+  late Shape1 shape = nextShapes[actualShapeIndex].copyWith();
   bool isRunning = false;
   bool isEndGame = false;
   Timer? timer;

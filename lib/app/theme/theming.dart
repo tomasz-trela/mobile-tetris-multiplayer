@@ -13,6 +13,7 @@ abstract class AppPadding {
   static const tinySizedBoxHeigth = SizedBox(height: tinyPaddingValue,);
 
   static final smallBorderRaduis = BorderRadius.circular(3);
+  static final mediumBorderRadius = BorderRadius.circular(10);
 }
 
 abstract class AppBorder {
@@ -46,6 +47,7 @@ class AppTheme implements AppThemeData {
     primaryContainer: ColorsConsts.tealDark,
     secondary: ColorsConsts.purple,
     secondaryContainer: ColorsConsts.purpleLight,
+    surfaceContainer: ColorsConsts.greyBlue,
     surface: ColorsConsts.blueDark,
     tertiary: ColorsConsts.yellow,
     onErrorContainer: ColorsConsts.red
@@ -75,6 +77,12 @@ class AppTheme implements AppThemeData {
     headlineMedium: TextStyle(
       color: ColorsConsts.blackBlue,
       fontSize: 20,
+      fontWeight: FontWeight.w600,
+      fontFamily: FontFamily.rajdhani
+    ),
+    headlineSmall: TextStyle(
+      color: ColorsConsts.mistyRose,
+      fontSize: 18,
       fontWeight: FontWeight.w600,
       fontFamily: FontFamily.rajdhani
     ),

@@ -1,26 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_tetris_multiplayer/app/theme/theming.dart';
+import 'package:mobile_tetris_multiplayer/features/game/models/color_type.dart';
 
 class GameBlock extends StatelessWidget {
   const GameBlock({
     super.key, 
-    this.backgroundColor = ColorsConsts.greyBlue, 
-    this.child
+    this.colorType, 
+    this.dimension,
   });
 
-  final Color backgroundColor;
-  final Widget? child;
-
+  final double? dimension;
+  final ColorType? colorType;
+  
   @override
   Widget build(BuildContext context) {
     return SizedBox.square(
+      dimension: dimension,
       child: Container(
-        padding: EdgeInsets.all(4),
+        padding: EdgeInsets.all(3),
         decoration: BoxDecoration(
           borderRadius: AppPadding.smallBorderRaduis,
-          color: backgroundColor
+          color: colorType?.dark ?? ColorsConsts.greyBlue
         ),
-        child: child,
+        child: colorType == null 
+          ? null 
+          : Container(
+            decoration: BoxDecoration(
+              borderRadius: AppPadding.smallBorderRaduis,
+              color: colorType!.light,
+            ),
+          ),
       ),
     );
   }
