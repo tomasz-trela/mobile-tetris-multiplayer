@@ -34,4 +34,5 @@ extension GoRouterX on GoRouter {
   void goSingleplayerPage() => go("/singleplayer");
   void goMultiplayerPage(String inviteCode) => go("/multiplayer");
   void goMultiplayerPageWithInvite(String inviteCode) => go("/multiplayer/$inviteCode");
+  void goHome() => go("/home");
 }

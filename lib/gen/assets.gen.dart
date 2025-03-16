@@ -16,12 +16,21 @@ class $AssetsIconsGen {
   /// File path: assets/icons/person.svg
   String get person => 'assets/icons/person.svg';
 
+  /// File path: assets/icons/play.svg
+  String get play => 'assets/icons/play.svg';
+
   /// List of all assets
-  List<String> get values => [avatar, person];
+  List<String> get values => [avatar, person, play];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/game_over_banner.svg
+  String get gameOverBanner => 'assets/images/game_over_banner.svg';
+
+  /// File path: assets/images/hourglass.svg
+  String get hourglass => 'assets/images/hourglass.svg';
 
   /// File path: assets/images/logo.svg
   String get logo => 'assets/images/logo.svg';
@@ -33,7 +42,7 @@ class $AssetsImagesGen {
   String get swords => 'assets/images/swords.svg';
 
   /// List of all assets
-  List<String> get values => [logo, medal, swords];
+  List<String> get values => [gameOverBanner, hourglass, logo, medal, swords];
 }
 
 class Assets {

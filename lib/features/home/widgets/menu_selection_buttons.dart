@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_tetris_multiplayer/app/router.dart';
@@ -10,7 +11,41 @@ class MenuSelectionButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     final size = MediaQuery.sizeOf(context);
+
+    void showComingSoonDialog(BuildContext context) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            backgroundColor: ColorsConsts.greyBlue,
+            title: Text(
+              "Coming Soon!",
+              textAlign: TextAlign.center,
+              style: textTheme.headlineLarge!.copyWith(
+                fontWeight: FontWeight.w600
+              ),
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SvgPicture.asset(Assets.images.hourglass),
+                SizedBox(height: 10),
+                Text(
+                  "This feature is not available yet, but we're working on it!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    }
 
     return ListView(
       shrinkWrap: true,
@@ -32,7 +67,7 @@ class MenuSelectionButtons extends StatelessWidget {
                     _MenuButtonSmall(
                       text: "Multiplayer", 
                       iconCount: 1, 
-                      onPressed: (){},
+                      onPressed: () => showComingSoonDialog(context),
                       backgroundColor: colorScheme.primaryContainer,
                     ),
                   ],
@@ -43,7 +78,7 @@ class MenuSelectionButtons extends StatelessWidget {
                 child: SizedBox(
                   height: size.height * 0.26,
                   child: FilledButton(
-                    onPressed: () {}, 
+                    onPressed: () => showComingSoonDialog(context), 
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -66,7 +101,7 @@ class MenuSelectionButtons extends StatelessWidget {
             backgroundColor: colorScheme.tertiary,
             padding: EdgeInsets.symmetric(vertical: AppPadding.smallPaddingValue)
           ),
-          onPressed: () {}, 
+          onPressed: () => showComingSoonDialog(context), 
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -117,7 +152,7 @@ class _MenuButtonSmall extends StatelessWidget {
                 (context) => SvgPicture.asset(Assets.icons.person)
               )
             ),
-            Text(text),
+            AutoSizeText(text),
           ],
         )
       ),

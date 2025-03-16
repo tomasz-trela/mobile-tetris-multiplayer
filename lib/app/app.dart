@@ -9,8 +9,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = AppTheme();
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.dark,
-      title: 'Flutter Demo',
+      title: 'Tetris',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),

@@ -13,10 +13,10 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: BaseAppBar(
         actions: [
-          IconButton(
-            icon: SvgPicture.asset(Assets.icons.avatar), 
-            onPressed: () {},
-          ),
+          // IconButton(
+          //   icon: SvgPicture.asset(Assets.icons.avatar), 
+          //   onPressed: () {},
+          // ),
         ],
       ),
       body: Center(

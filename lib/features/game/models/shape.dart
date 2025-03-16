@@ -47,6 +47,26 @@ abstract class Shape {
       _ => OShapeWidget(color: colorType),
     };
   }
+
+  void rotate(Board board){
+    List<Block> newBlocks = [];
+    bool canRotate = true;
+    for (var element in blocks) {
+      if(element == center){
+        newBlocks.add(element);
+      }else{
+        int newX = center.x +(element.y-center.y);
+        int newY = center.y -(element.x-center.x);
+        if(newX < 0 || newX > 9 || newY < 0 || newY > 19 || board[newY][newX] != null){
+          canRotate = false;
+          break;
+        }
+        newBlocks.add(Block(newX, newY));
+      }
+    }
+
+    if(canRotate) blocks = newBlocks;
+  }
 }
 
 class LeftL extends Shape {
@@ -92,6 +112,11 @@ class OShape extends Shape {
     Block(1, 0),
     Block(1, 1),
   ], Block(0, 0));
+
+  @override
+  void rotate(Board board) {
+    //This shape doesn't rotate
+  }
 }
 
 class ZShape extends Shape {

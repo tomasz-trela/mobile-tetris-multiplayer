@@ -70,8 +70,8 @@ class AppTheme implements AppThemeData {
   static final _textTheme = TextTheme(
     titleMedium: TextStyle(
       color: ColorsConsts.mistyRose,
-      fontSize: 24,
-      fontWeight: FontWeight.w700,
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
       fontFamily: FontFamily.rajdhani
     ),
     headlineMedium: TextStyle(

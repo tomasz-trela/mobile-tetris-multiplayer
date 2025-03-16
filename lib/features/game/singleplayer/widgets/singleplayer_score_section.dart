@@ -9,7 +9,7 @@ class SingleplayerScoreSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final game = context.watch<SingleplayerNotifier>().game;
+    final game = context.watch<SingleplayerNotifier>();
     
     return SizedBox(
       width: double.infinity,
